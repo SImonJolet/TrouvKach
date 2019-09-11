@@ -1,11 +1,3 @@
-/* becodeorg/trouvkach
- *
- * /webpack.config.js - Webpack configuration
- *
- * coded by leny@BeCode
- * started at 06/09/2019
- */
-
 /* eslint-disable */
 
 const webpack = require("webpack");
@@ -72,6 +64,7 @@ module.exports = env => {
                         },
                     ],
                 },
+                {test: /\.css$/, loader: "style-loader!css-loader"},
                 {
                     test: /\.js$/,
                     exclude: [/node_modules/],

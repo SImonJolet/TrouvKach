@@ -1,11 +1,3 @@
-/* becodeorg/trouvkach
- *
- * /src/server/index.js - Server entry point
- *
- * coded by leny@BeCode
- * started at 06/09/2019
- */
-
 import express from "express";
 import path from "path";
 
@@ -17,7 +9,7 @@ app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.get("/hello", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
-    res.send("Hello, World!");
+    res.send("TrouvKach is currently being built. Coming soon.");
 });
 
 app.listen(APP_PORT, () =>

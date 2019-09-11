@@ -2,7 +2,7 @@
   "name": "@becode/trouvkach",
   "version": "0.0.1",
   "description": "A simple react/node app, locating the ATMs nearby.",
-  "author": "leny <leny@becode.org>",
+  "author": "Simon, Bridge & Rimbaud",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -33,6 +33,7 @@
     "@becode/eslint-config": "^0.6.0",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.2",
+    "css-loader": "^3.2.0",
     "eslint": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
@@ -42,6 +43,7 @@
     "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
+    "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
