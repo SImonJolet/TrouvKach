@@ -16,7 +16,6 @@ module.exports = env => {
             path: "../",
         }),
     ];
-
     let optimization = {};
 
     if (env !== "dev") {
