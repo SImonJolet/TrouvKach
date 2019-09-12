@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import router from "./api-routes";
 
 const mongo = require("mongodb").MongoClient;
 
@@ -13,7 +14,9 @@ app.listen(APP_PORT, () =>
     // eslint-disable-next-line no-console
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 );
-
+app.get("/simon", (req, res) => {
+    res.send("Hello World!");
+});
 //////////////////////////////////////////// DB Access ////////////////////////////////////////////
 
 mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
@@ -23,13 +26,15 @@ mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
 
     terminals
         .find({address: "Zeelaan 67, 8670 Koksijde"})
-        .toArray((err, item1) => {
+        .toArray(err, item1 => {
             // eslint-disable-next-line no-console
             const thatBank = item1[0].bank;
 
-            banks.find({_id: thatBank}).toArray((err, item2) => {
+            banks.find({_id: thatBank}).toArray(err, item2 => {
                 // eslint-disable-next-line no-console
                 console.log(item2[0].name);
             });
         });
 });
+
+app.use("/api", router);
