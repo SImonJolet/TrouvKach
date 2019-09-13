@@ -8,24 +8,88 @@ mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
 
     router.get("/", (req, res) => {
         res.json({
-            status: "API is working",
-            message: "Welcome to TrouvKach",
+            status: "All good",
+            message: "Welcome on TrouvKash",
         });
     });
 
     router.get("/banks", (req, res) => {
         res.send(
-            banks.find().toArray((err, items) => {
-                console.log(items);
+            banks.find().toArray((err1, items) => {
+                // eslint-disable-next-line no-console
+                console.log(err1, items);
             }),
         );
     });
+
+    router.get("/banks/:name", (req, res) => {
+        res.send(
+            banks.find({name: req.params.name}).toArray((err2, item) => {
+                // eslint-disable-next-line no-console
+                console.log(err2, item);
+            }),
+        );
+    });
+
     router.get("/terminals", (req, res) => {
         res.send(
-            terminals.find().toArray((err, items) => {
-                console.log(items);
+            terminals.find().toArray((err3, items) => {
+                // eslint-disable-next-line no-console
+                console.log(err3, items);
+            }),
+        );
+    });
+
+    router.get("/terminals/:latitude/:longitude", (req, res) => {
+        res.send(
+            terminals
+                .find({
+                    latitude: Number(req.params.latitude),
+                    longitude: Number(req.params.longitude),
+                })
+                .toArray((err4, item) => {
+                    // eslint-disable-next-line no-console
+                    console.log(err4, item);
+                }),
+        );
+    });
+
+    router.get("/:latitude/:longitude", (req, res) => {
+        res.send(
+            terminals.find().toArray((err5, item) => {
+                const latitude = Number(req.params.latitude);
+                const ratioLat =
+                    Math.cos((req.params.latitude * Math.PI) / 180) * 111;
+                const tenKmLat = (1 / ratioLat) * 1;
+                const minLat = latitude - 0.2343;
+                const maxLat = latitude + tenKmLat;
+
+                const longitude = Number(req.params.longitude);
+                const ratioLong =
+                    Math.cos((req.params.longitude * Math.PI) / 180) * 85;
+                const tenKmLong = (1 / ratioLong) * 1;
+                const minLong = longitude - tenKmLong;
+                const maxLong = longitude + tenKmLong;
+                const result = [];
+                let count = 0;
+
+                item.forEach((el, index) => {
+                    if (
+                        el.latitude > minLat &&
+                        el.latitude < maxLat &&
+                        (el.longitude > minLong && el.longitude < maxLong)
+                    ) {
+                        result.push(el);
+                        count++;
+                    }
+                    // eslint-disable-next-line no-console
+                    index === item.length - 1 && console.log(err5, result);
+                });
+                // eslint-disable-next-line no-console
+                console.log(`There is ${count} ATM near your location`);
             }),
         );
     });
 });
+
 module.exports = router;
