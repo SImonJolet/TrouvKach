@@ -21,7 +21,6 @@ mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
             }),
         );
     });
-
     router.get("/terminals", (req, res) => {
         res.send(
             // eslint-disable-next-line no-shadow
@@ -31,5 +30,4 @@ mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
         );
     });
 });
-
 module.exports = router;

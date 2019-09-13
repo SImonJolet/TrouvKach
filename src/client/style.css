@@ -23,8 +23,13 @@ body {
     100% {
         background-position: 0% 50%;
     }
-}  
+}
 
 h2 {
     font-weight: 300;
+}
+#runBtn {
+    padding: 5px;
+    margin: 5px;
+    text-align: center;
 }
