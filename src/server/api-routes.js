@@ -56,38 +56,52 @@ mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
 
     router.get("/:latitude/:longitude", (req, res) => {
         res.send(
-            terminals.find().toArray((err5, item) => {
-                const latitude = Number(req.params.latitude);
-                const ratioLat =
-                    Math.cos((req.params.latitude * Math.PI) / 180) * 111;
-                const tenKmLat = (1 / ratioLat) * 1;
-                const minLat = latitude - 0.2343;
-                const maxLat = latitude + tenKmLat;
+            terminals
+                .find({
+                    latitude: {
+                        $gte: Number(req.params.latitude) - 0.25,
+                        $lte: Number(req.params.latitude) + 0.25,
+                    },
+                    longitude: {
+                        $gte: Number(req.params.longitude) - 0.25,
+                        $lte: Number(req.params.longitude) + 0.25,
+                    },
+                })
+                .toArray((err5, item) => {
+                    // LATITUDE //
+                    const latitude = Number(req.params.latitude);
+                    const ratioLat =
+                        Math.cos((req.params.latitude * Math.PI) / 180) * 111;
+                    const tenKmLat = (1 / ratioLat) * 1;
+                    const minLat = latitude - tenKmLat;
+                    const maxLat = latitude + tenKmLat;
 
-                const longitude = Number(req.params.longitude);
-                const ratioLong =
-                    Math.cos((req.params.longitude * Math.PI) / 180) * 85;
-                const tenKmLong = (1 / ratioLong) * 1;
-                const minLong = longitude - tenKmLong;
-                const maxLong = longitude + tenKmLong;
-                const result = [];
-                let count = 0;
+                    // LONGITUDE //
+                    const longitude = Number(req.params.longitude);
+                    const ratioLong =
+                        Math.cos((req.params.longitude * Math.PI) / 180) * 85;
+                    const tenKmLong = (1 / ratioLong) * 1;
+                    const minLong = longitude - tenKmLong;
+                    const maxLong = longitude + tenKmLong;
+                    const result = [];
+                    let count = 0;
 
-                item.forEach((el, index) => {
-                    if (
-                        el.latitude > minLat &&
-                        el.latitude < maxLat &&
-                        (el.longitude > minLong && el.longitude < maxLong)
-                    ) {
-                        result.push(el);
-                        count++;
-                    }
+                    // FOR LOOP ON TERMINALS ARRAY //
+                    item.forEach((el, index) => {
+                        if (
+                            el.latitude > minLat &&
+                            el.latitude < maxLat &&
+                            (el.longitude > minLong && el.longitude < maxLong)
+                        ) {
+                            result.push(el);
+                            count++;
+                        }
+                        // eslint-disable-next-line no-console
+                        index === item.length - 1 && console.log(err5, result);
+                    });
                     // eslint-disable-next-line no-console
-                    index === item.length - 1 && console.log(err5, result);
-                });
-                // eslint-disable-next-line no-console
-                console.log(`There is ${count} ATM near your location`);
-            }),
+                    console.log(`There is ${count} ATM near your location`);
+                }),
         );
     });
 });
