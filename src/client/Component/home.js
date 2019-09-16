@@ -25,7 +25,7 @@ function Home() {
     return (
         <div>
             <h2>{"TrouvKash"}</h2>
-            <h2>{"My favourite ATM finder"}</h2>
+            <h2>{"Your favourite ATM finder"}</h2>
             <button id={"runBtn"} type={"button"} onClick={getLocation}>
                 <img
                     id={"runBtnImg"}
@@ -33,8 +33,8 @@ function Home() {
                         "https://img.icons8.com/dusk/64/000000/pos-terminal.png"
                     }
                 />
+                <p> {"Find ATM"}</p>
             </button>
-            <h2> {"Find ATM"}</h2>
         </div>
     );
 }
