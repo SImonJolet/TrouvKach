@@ -1,35 +1,153 @@
 body {
-    margin: 0;
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: "Exo", sans-serif;
-    color: #fff;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: "Gayathri", sans-serif;
+  color: #fff;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  -webkit-animation: gradientBG 15s ease infinite;
+          animation: gradientBG 15s ease infinite;
+}
+
+@-webkit-keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 h2 {
-    font-weight: 300;
+  font-weight: 300;
+  text-align: center;
 }
+
 #runBtn {
-    padding: 5px;
-    margin: 5px;
-    text-align: center;
+  width: 100%;
+  font-size: 3em;
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+  color: white;
+  background-color: transparent;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
 }
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  min-height: 100vh;
+  background-color: #ededed;
+}
+
+.loader {
+  max-width: 15rem;
+  width: 100%;
+  height: auto;
+  stroke-linecap: round;
+}
+
+circle {
+  fill: none;
+  stroke-width: 3.5;
+  -webkit-animation-name: preloader;
+          animation-name: preloader;
+  -webkit-animation-duration: 3s;
+          animation-duration: 3s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-timing-function: ease-in-out;
+          animation-timing-function: ease-in-out;
+  -webkit-transform-origin: 170px 170px;
+          transform-origin: 170px 170px;
+  will-change: transform;
+}
+
+circle:nth-of-type(1) {
+  stroke-dasharray: 550px;
+}
+
+circle:nth-of-type(2) {
+  stroke-dasharray: 500px;
+}
+
+circle:nth-of-type(3) {
+  stroke-dasharray: 450px;
+}
+
+circle:nth-of-type(4) {
+  stroke-dasharray: 300px;
+}
+
+circle:nth-of-type(1) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+
+circle:nth-of-type(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+
+circle:nth-of-type(3) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+
+circle:nth-of-type(4) {
+  -webkit-animation-delay: -0.6s;
+          animation-delay: -0.6s;
+}
+
+@-webkit-keyframes preloader {
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes preloader {
+  50% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+/*# sourceMappingURL=style.css.map */
