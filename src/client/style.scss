@@ -30,15 +30,19 @@ h2 {
     text-align: center;
 }
 #runBtn {
-    width: 100%;
+    width: 30%;
     font-size: 3em;
-    padding: 5px;
+    padding: 0.2em;
     margin: auto;
     text-align: center;
     color: white;
     background-color: transparent;
     border: 1px solid whitesmoke;
     border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 .container {
     display: flex;

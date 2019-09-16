@@ -1,5 +1,5 @@
 import React from "react";
-import showLoadingBox from "./loading-circle-home";
+//import showLoadingBox from "./loading-circle-home";
 
 function showPosition(position) {
     const lat = position.coords.latitude;
@@ -17,19 +17,24 @@ function getLocation() {
     }
 }
 
-function onClickBtn() {
-    showLoadingBox();
-    getLocation();
-}
+// function onClickBtn() {
+//     getLocation().then(function (test) )
+// }
 
 function Home() {
     return (
         <div>
             <h2>{"TrouvKash"}</h2>
             <h2>{"My favourite ATM finder"}</h2>
-            <button id={"runBtn"} type={"button"} onClick={onClickBtn}>
-                {"Find ATM"}
+            <button id={"runBtn"} type={"button"} onClick={getLocation}>
+                <img
+                    id={"runBtnImg"}
+                    src={
+                        "https://img.icons8.com/dusk/64/000000/pos-terminal.png"
+                    }
+                />
             </button>
+            <h2> {"Find ATM"}</h2>
         </div>
     );
 }

@@ -53,15 +53,25 @@ h2 {
 }
 
 #runBtn {
-  width: 100%;
+  width: 30%;
   font-size: 3em;
-  padding: 5px;
+  padding: 0.2em;
   margin: auto;
   text-align: center;
   color: white;
   background-color: transparent;
   border: 1px solid whitesmoke;
   border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
 }
 
 .container {
