@@ -23,17 +23,14 @@ function getLocation() {
 
 function Home() {
     return (
-        <div>
-            <h2>{"TrouvKash"}</h2>
-            <h2>{"Your favourite ATM finder"}</h2>
+        <div id={"home"}>
             <button id={"runBtn"} type={"button"} onClick={getLocation}>
                 <img
                     id={"runBtnImg"}
                     src={
-                        "https://img.icons8.com/dusk/64/000000/pos-terminal.png"
+                        "https://img.icons8.com/color/48/000000/gps-device.png"
                     }
                 />
-                <p> {"Find ATM"}</p>
             </button>
         </div>
     );
