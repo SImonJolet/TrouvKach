@@ -4,7 +4,7 @@ const router = require("express").Router();
 mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
     const db = client.db("trouvkash");
     const terminals = db.collection("terminals");
-    // const banks = db.collection("banks");
+    const banks = db.collection("banks");
 
     router.get("/", (req, res) => {
         res.json({
@@ -13,46 +13,46 @@ mongo.connect("mongodb://dev:dev@mongo:27017/admin", (err, client) => {
         });
     });
 
-    // router.get("/banks", (req, res) => {
-    //     res.send(
-    //         banks.find().toArray((err1, items) => {
-    //             // eslint-disable-next-line no-console
-    //             console.log(err1, items);
-    //         }),
-    //     );
-    // });
+    router.get("/banks", (req, res) => {
+        res.send(
+            banks.find().toArray((err1, items) => {
+                // eslint-disable-next-line no-console
+                console.log(err1, items);
+            }),
+        );
+    });
 
-    // router.get("/banks/:name", (req, res) => {
-    //     res.send(
-    //         banks.find({name: req.params.name}).toArray((err2, item) => {
-    //             // eslint-disable-next-line no-console
-    //             console.log(err2, item);
-    //         }),
-    //     );
-    // });
+    router.get("/banks/:name", (req, res) => {
+        res.send(
+            banks.find({name: req.params.name}).toArray((err2, item) => {
+                // eslint-disable-next-line no-console
+                console.log(err2, item);
+            }),
+        );
+    });
 
-    // router.get("/terminals", (req, res) => {
-    //     res.send(
-    //         terminals.find().toArray((err3, items) => {
-    //             // eslint-disable-next-line no-console
-    //             console.log(err3, items);
-    //         }),
-    //     );
-    // });
+    router.get("/terminals", (req, res) => {
+        res.send(
+            terminals.find().toArray((err3, items) => {
+                // eslint-disable-next-line no-console
+                console.log(err3, items);
+            }),
+        );
+    });
 
-    // router.get("/terminals/:latitude/:longitude", (req, res) => {
-    //     res.send(
-    //         terminals
-    //             .find({
-    //                 latitude: Number(req.params.latitude),
-    //                 longitude: Number(req.params.longitude),
-    //             })
-    //             .toArray((err4, item) => {
-    //                 // eslint-disable-next-line no-console
-    //                 console.log(err4, item);
-    //             }),
-    //     );
-    // });
+    router.get("/terminals/:latitude/:longitude", (req, res) => {
+        res.send(
+            terminals
+                .find({
+                    latitude: Number(req.params.latitude),
+                    longitude: Number(req.params.longitude),
+                })
+                .toArray((err4, item) => {
+                    // eslint-disable-next-line no-console
+                    console.log(err4, item);
+                }),
+        );
+    });
 
     router.get("/:latitude/:longitude", (req, res) => {
         res.send(
