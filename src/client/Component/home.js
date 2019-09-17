@@ -1,11 +1,11 @@
 import React from "react";
-//import showLoadingBox from "./loading-circle-home";
+// import List from "./map-page-components/list";
+// import Map from "./map-page-components/map";
+// import Modal from "./map-page-components/modal";
 
 function showPosition(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    console.log(lat);
-    console.log(lon);
     window.location.href = `/api/${lat}/${lon}`;
 }
 
@@ -16,10 +16,6 @@ function getLocation() {
         throw Error;
     }
 }
-
-// function onClickBtn() {
-//     getLocation().then(function (test) )
-// }
 
 function Home() {
     return (
