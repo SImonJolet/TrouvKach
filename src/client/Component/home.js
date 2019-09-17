@@ -5,7 +5,9 @@ function showPosition(position) {
     const lon = position.coords.longitude;
 
     fetch(`/api/${lat}/${lon}`).then(dataJSON => {
-        console.log(dataJSON);
+        dataJSON.json().then(terminalsList => {
+            console.log(terminalsList);
+        });
     });
 }
 
