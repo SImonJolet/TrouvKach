@@ -39,20 +39,23 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-unicorn": "^10.0.0",
-    "express": "^4.17.1",
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "lint-staged": "^9.2.5",
-    "mongodb": "^3.3.2",
     "prettier": "^1.18.2",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
     "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "leaflet": "^1.5.1",
+    "mongodb": "^3.3.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-leaflet": "^2.4.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npx lint-staged"

@@ -1,4 +1,5 @@
 import React from "react";
+import Map from "./map";
 
 function showPosition(position) {
     const lat = position.coords.latitude;
@@ -53,7 +54,7 @@ function Home() {
             </div>
         );
     }
-    return null; // REPLACE WITH CONTENT
+    return <Map />; // REPLACE WITH CONTENT
 }
 
 export default Home;
