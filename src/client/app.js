@@ -4,11 +4,7 @@ import Home from "./Component/home";
 import "./style.css";
 
 function App() {
-    return (
-        <div className={"App"}>
-            <Home />
-        </div>
-    );
+    return <Home />;
 }
 
 const rootElement = document.querySelector("#app");
