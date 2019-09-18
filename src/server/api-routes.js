@@ -79,7 +79,7 @@ mongo.connect(
                         const ratioLat =
                             Math.cos((req.params.latitude * Math.PI) / 180) *
                             111;
-                        const tenKmLat = (1 / ratioLat) * 1;
+                        const tenKmLat = (1 / ratioLat) * 5;
                         const minLat = latitude - tenKmLat;
                         const maxLat = latitude + tenKmLat;
 
@@ -88,7 +88,7 @@ mongo.connect(
                         const ratioLong =
                             Math.cos((req.params.longitude * Math.PI) / 180) *
                             85;
-                        const tenKmLong = (1 / ratioLong) * 1;
+                        const tenKmLong = (1 / ratioLong) * 5;
                         const minLong = longitude - tenKmLong;
                         const maxLong = longitude + tenKmLong;
                         const result = [];

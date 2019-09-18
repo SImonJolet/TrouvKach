@@ -2,18 +2,25 @@ import React, {useState, useEffect} from "react";
 import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 
 function Maper() {
-    const [usrLoc, setuserLoc] = useState();
-    const [terminalsList, setterminalsList] = useState();
+    const [usrLoc, setusrLoc] = useState();
+    let [terminalsList = [], setterminalsList] = useState();
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
-            setuserLoc([position.coords.latitude, position.coords.longitude]);
+            setusrLoc([position.coords.latitude, position.coords.longitude]);
+            console.log(usrLoc);
 
             fetch(
                 `/api/${position.coords.latitude}/${position.coords.longitude}`,
             ).then(dataJSON => {
                 dataJSON.json().then(data => {
-                    console.log(data);
+                    terminalsList = data;
+                    setterminalsList(terminalsList);
+                    // const newList = [];
+                    // terminalsList.forEach(el => {
+                    //     newList.push([el.latitude, el.longitude]);
+                    // });
+                    // console.log(newList);
                 });
             });
         });
@@ -41,6 +48,10 @@ function Maper() {
                 />
                 <Marker position={usrLoc}>
                     <Popup>{"You are here."}</Popup>
+                </Marker>
+                <Marker
+                    position={usrLoc}>
+                    <Popup>{"ATM"}</Popup>
                 </Marker>
             </Map>
         </div>

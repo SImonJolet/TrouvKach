@@ -155,34 +155,34 @@ body {
 
     .small {
         animation: ripple 10s infinite;
-        animation-delay: 0s;
+        animation-delay: -2s;
         width: 80px;
         height: 80px;
     }
 
     .medium {
         animation: ripple 10s infinite;
-        animation-delay: 1s;
+        animation-delay: -1s;
         width: 160px;
         height: 160px;
     }
     .large {
         animation: ripple 10s infinite;
-        animation-delay: 2s;
+        animation-delay: 0s;
         width: 240px;
         height: 240px;
     }
 
     .xlarge {
         animation: ripple 10s infinite;
-        animation-delay: 3s;
+        animation-delay: 1s;
         width: 300px;
         height: 300px;
     }
 
     .xxlarge {
         animation: ripple 10s infinite;
-        animation-delay: 4s;
+        animation-delay: 2s;
         width: 360px;
         height: 360px;
     }
@@ -387,5 +387,5 @@ body {
     z-index: 100;
     position: absolute;
     border: 2rem solid rgba(255, 255, 255, 0.1);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
   }
