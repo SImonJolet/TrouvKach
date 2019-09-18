@@ -47,7 +47,8 @@
     "style-loader": "^1.0.0",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "mongodb": "^3.3.2"
   },
   "dependencies": {
     "express": "^4.17.1",
