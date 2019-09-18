@@ -13,8 +13,7 @@ function Maper() {
                 `/api/${position.coords.latitude}/${position.coords.longitude}`,
             ).then(dataJSON => {
                 dataJSON.json().then(data => {
-                    setterminalsList(data);
-                    console.log(terminalsList);
+                    console.log(data);
                 });
             });
         });
@@ -31,9 +30,9 @@ function Maper() {
     return (
         <div className={"map"}>
             <Map
-                style={{height: "50vh", width: "50vw"}}
+                style={{height: "75vh", width: "75vw"}}
                 center={usrLoc}
-                zoom={13}>
+                zoom={14}>
                 <TileLayer
                     url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                     attribution={

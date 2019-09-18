@@ -347,6 +347,7 @@ body {
     width: 100vw;
     justify-content: center;
     align-items: center;
+    animation: blinking 10s infinite;
 
     h1 {
       margin: 0;
@@ -356,19 +357,35 @@ body {
       text-transform: uppercase;
       letter-spacing: 2rem;
     }
-  }
+}
+
+@keyframes blinking {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
   
 /* -----------------------------------------| MAPER COMPONENT |----------------------------------------- */
-  
-  #map {
+  #app {
     position: absolute;
-    display: flex;
-    justify-content: center;
+    display:flex;
     align-items: center;
-    border: 5px solid white;
-    height: 50vh;
-    width: 50vw;
-    -webkit-box-shadow: 0px 0px 10px 0px lightgrey;
-    -moz-box-shadow: 0px 0px 10px 0px lightgrey;
-    box-shadow: 0px 0px 10px 0px lightgrey;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  .map {
+    z-index: 100;
+    position: absolute;
+    border: 2rem solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
   }
