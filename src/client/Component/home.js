@@ -1,11 +1,14 @@
 import React from "react";
+import Map from "./map";
 
 function showPosition(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
     fetch(`/api/${lat}/${lon}`).then(dataJSON => {
-        console.log(dataJSON);
+        dataJSON.json().then(terminalsList => {
+            console.log(terminalsList);
+        });
     });
 }
 
@@ -51,7 +54,7 @@ function Home() {
             </div>
         );
     }
-    return null; // REPLACE WITH CONTENT
+    return <Map />; // REPLACE WITH CONTENT
 }
 
 export default Home;
