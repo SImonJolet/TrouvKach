@@ -1,5 +1,6 @@
 import React from "react";
 import Map from "./map";
+import List from "./map-page-components/list";
 
 function showPosition(position) {
     const lat = position.coords.latitude;
@@ -54,7 +55,12 @@ function Home() {
             </div>
         );
     }
-    return <Map />; // REPLACE WITH CONTENT
+    return (
+        <div>
+            <Map />
+            <List terminaleList={showPosition} />
+        </div>
+    ); // REPLACE WITH CONTENT
 }
 
 export default Home;
