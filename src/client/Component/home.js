@@ -1,17 +1,16 @@
 import React from "react";
-import Map from "./map";
-import List from "./map-page-components/list";
+//import List from "./list";
 
-function showPosition(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+// function showPosition(position) {
+//     const lat = position.coords.latitude;
+//     const lon = position.coords.longitude;
 
-    fetch(`/api/${lat}/${lon}`).then(dataJSON => {
-        dataJSON.json().then(terminalsList => {
-            console.log(terminalsList);
-        });
-    });
-}
+//     fetch(`/api/${lat}/${lon}`).then(dataJSON => {
+//         dataJSON.json().then(terminalsList => {
+//             console.log(terminalsList);
+//         });
+//     });
+// }
 import Maper from "./maper";
 
 function Home() {
@@ -49,8 +48,7 @@ function Home() {
     }
     return (
         <div>
-            <Map />
-            <List terminaleList={showPosition} />
+            {/* <List CoordTerm={(coord[0], coord[1])} /> */}
             <Maper />
         </div>
     ); // REPLACE WITH CONTENT

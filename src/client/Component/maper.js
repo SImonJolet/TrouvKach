@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 //import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 import L from "leaflet";
 
-function Maper() {
+function Maper(props) {
     const [usrLoc, setusrLoc] = useState();
     // let [terminalsList = [], setterminalsList] = useState();
 
@@ -42,6 +42,7 @@ function Maper() {
                             popupAnchor: [1, -34],
                             shadowSize: [50, 50],
                         });
+                        props.onCoord([lat, lon]);
                         const markerLocation = new L.LatLng(lat, lon);
                         const marker = new L.Marker(markerLocation, {
                             icon: moneyIcon,
