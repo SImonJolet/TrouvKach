@@ -1,5 +1,5 @@
 import React from "react";
-//import List from "./list";
+import List from "./list";
 
 // function showPosition(position) {
 //     const lat = position.coords.latitude;
@@ -48,7 +48,7 @@ function Home() {
     }
     return (
         <div>
-            {/* <List CoordTerm={(coord[0], coord[1])} /> */}
+            <List />
             <Maper />
         </div>
     ); // REPLACE WITH CONTENT
