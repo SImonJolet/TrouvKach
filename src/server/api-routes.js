@@ -67,12 +67,12 @@ mongo.connect(
                         {
                             $match: {
                                 latitude: {
-                                    $gte: Number(req.params.latitude) - 0.1,
-                                    $lte: Number(req.params.latitude) + 0.1,
+                                    $gte: Number(req.params.latitude) - 10,
+                                    $lte: Number(req.params.latitude) + 10,
                                 },
                                 longitude: {
-                                    $gte: Number(req.params.longitude) - 0.1,
-                                    $lte: Number(req.params.longitude) + 0.1,
+                                    $gte: Number(req.params.longitude) - 20,
+                                    $lte: Number(req.params.longitude) + 20,
                                 },
                             },
                         },
@@ -91,7 +91,7 @@ mongo.connect(
                         const ratioLat =
                             Math.cos((req.params.latitude * Math.PI) / 180) *
                             111;
-                        const tenKmLat = (1 / ratioLat) * 1;
+                        const tenKmLat = (1 / ratioLat) * 10;
                         const minLat = latitude - tenKmLat;
                         const maxLat = latitude + tenKmLat;
 
@@ -100,7 +100,7 @@ mongo.connect(
                         const ratioLong =
                             Math.cos((req.params.longitude * Math.PI) / 180) *
                             85;
-                        const tenKmLong = (1 / ratioLong) * 2;
+                        const tenKmLong = (1 / ratioLong) * 20;
                         const minLong = longitude - tenKmLong;
                         const maxLong = longitude + tenKmLong;
                         const result = [];

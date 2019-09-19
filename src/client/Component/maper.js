@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import L from "leaflet";
+import "leaflet-routing-machine";
 
 function Maper() {
     const [usrLoc, setusrLoc] = useState();
@@ -26,7 +27,7 @@ function Maper() {
                                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
                         },
                     ).addTo(map);
-                    for (const element of markers) {
+                    markers.forEach(element => {
                         const lat = element.latitude;
                         const lon = element.longitude;
                         if (
@@ -46,11 +47,22 @@ function Maper() {
                             icon: moneyIcon,
                         });
                         marker.addTo(map);
-
                         marker.bindPopup(
-                            `<b>Bank</b>: ${element.bankDetails[0].name} (${element.bankDetails[0].country})<br><b>Address</b>: ${element.address}<br><b>Website</b>: <a href:"${element.bankDetails[0].url}" target= "blank">${element.bankDetails[0].url}</a>`,
+                            `<b>Bank:</b> ${element.bankDetails[0].name} (${element.bankDetails[0].country})<br><b>Address:</b> ${element.address}<br><b>Website:</b> <a href:"${element.bankDetails[0].url}" target= "blank">${element.bankDetails[0].url}</a><br><br><button class="button" type="button">GET ME THERE</button>`,
                         );
-                    }
+                        document.querySelector("button").onclick = () => {
+                            // L.Routing.control({
+                            //     waypoints: [
+                            //         L.latLng(
+                            //             position.coords.latitude,
+                            //             position.coords.longitude,
+                            //         ),
+                            //         L.latLng(50, 5),
+                            //     ],
+                            // }).addTo(map);
+                            console.log("salut");
+                        };
+                    });
                     const usrIcon = new L.Icon({
                         iconUrl:
                             "https://img.icons8.com/dusk/64/000000/user-location.png",
@@ -72,7 +84,12 @@ function Maper() {
     if (!usrLoc) {
         return (
             <div className={"load"}>
-                <h1>{"Loading..."}</h1>
+                <div id={"text"}>
+                    <h1>{"Loading"}</h1>
+                    <h1 id={"first"}>{"."}</h1>
+                    <h1 id={"second"}>{"."}</h1>
+                    <h1 id={"third"}>{"."}</h1>
+                </div>
             </div>
         );
     }
