@@ -14,10 +14,12 @@ function Maper() {
                 `/api/${position.coords.latitude}/${position.coords.longitude}`,
             ).then(dataJSON => {
                 dataJSON.json().then(markers => {
-
                     const map = L.map("map", {
-                        center: [50.496053599999996, 5.0089333],
-                        zoom: 13,
+                        center: [
+                            position.coords.latitude,
+                            position.coords.longitude,
+                        ],
+                        zoom: 12,
                     });
                     L.tileLayer(
                         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -30,13 +32,41 @@ function Maper() {
                         const lat = element[2];
                         const lon = element[3];
                         const popupText = element[4];
-
+                        const moneyIcon = new L.Icon({
+                            iconUrl:
+                                "https://img.icons8.com/officel/80/000000/money-bag-euro.png",
+                            shadowUrl:
+                                "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+                            iconSize: [40, 40],
+                            iconAnchor: [12, 41],
+                            popupAnchor: [1, -34],
+                            shadowSize: [50, 50],
+                        });
                         const markerLocation = new L.LatLng(lat, lon);
-                        const marker = new L.Marker(markerLocation);
+                        const marker = new L.Marker(markerLocation, {
+                            icon: moneyIcon,
+                        });
                         marker.addTo(map);
 
                         marker.bindPopup(`Atm here: ${popupText}`);
                     }
+                    const redIcon = new L.Icon({
+                        iconUrl:
+                            "https://img.icons8.com/dusk/64/000000/user-location.png",
+                        shadowUrl:
+                            "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+                        iconSize: [50, 50],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [50, 50],
+                    });
+                    const markerUsr = new L.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude,
+                    );
+                    const markerUser = new L.Marker(markerUsr, {icon: redIcon});
+                    markerUser.addTo(map);
+                    markerUser.bindPopup(`Your are here`);
                 });
             });
         });
@@ -50,7 +80,11 @@ function Maper() {
         );
     }
 
-    return <div id={"map"} style={{height: "75vh", width: "75vw"}} />;
+    return (
+        <div className={"map"}>
+            <div id={"map"} style={{height: "75vh", width: "75vw"}} />
+        </div>
+    );
     // return (
     //     <div className={"map"}>
     //         <Map
