@@ -355,26 +355,33 @@ body {
       color: white;
       font-size: 2rem;
       text-transform: uppercase;
-      letter-spacing: 2rem;
     }
 }
 
 @keyframes blinking {
     0% {
         opacity: 0;
-    }
-    25% {
+        letter-spacing: 0rem;
+      }
+      1%{
+        letter-spacing: 0rem;
+      }
+      25% {
         opacity: 1;
-    }
-    50% {
+        letter-spacing: 2rem;
+      }
+      50% {
         opacity: 0.5;
-    }
-    100% {
+        letter-spacing: 2rem;
+      }
+      100% {
         opacity: 0;
-    }
+        letter-spacing: 2rem;
+      }
 }
   
 /* -----------------------------------------| MAPER COMPONENT |----------------------------------------- */
+
   #app {
     position: absolute;
     display:flex;
@@ -388,4 +395,8 @@ body {
     position: absolute;
     border: 2rem solid rgba(255, 255, 255, 0.1);
     border-radius: 0.5rem;
+  }
+
+  .leaflet-popup-content-wrapper {
+      background: white;
   }
