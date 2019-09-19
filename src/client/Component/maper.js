@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 import L from "leaflet";
 
-function Maper(props) {
+function Maper() {
     const [usrLoc, setusrLoc] = useState();
     // let [terminalsList = [], setterminalsList] = useState();
 
