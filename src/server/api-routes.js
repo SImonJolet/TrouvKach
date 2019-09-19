@@ -79,7 +79,7 @@ mongo.connect(
                         const ratioLat =
                             Math.cos((req.params.latitude * Math.PI) / 180) *
                             111;
-                        const tenKmLat = (1 / ratioLat) * 5;
+                        const tenKmLat = (1 / ratioLat) * 1;
                         const minLat = latitude - tenKmLat;
                         const maxLat = latitude + tenKmLat;
 
@@ -88,10 +88,11 @@ mongo.connect(
                         const ratioLong =
                             Math.cos((req.params.longitude * Math.PI) / 180) *
                             85;
-                        const tenKmLong = (1 / ratioLong) * 5;
+                        const tenKmLong = (1 / ratioLong) * 1;
                         const minLong = longitude - tenKmLong;
                         const maxLong = longitude + tenKmLong;
                         const result = [];
+                        const termi = [];
 
                         // FOR LOOP ON TERMINALS ARRAY //
                         item.forEach((el, index) => {
@@ -101,10 +102,18 @@ mongo.connect(
                                 (el.longitude > minLong &&
                                     el.longitude < maxLong)
                             ) {
-                                result.push(Object.values(el));
+                                result.push(el);
+
+                                banks
+                                    .find({_id: el.bank})
+                                    .toArray()
+                                    .then((err6, thatBank) => {
+                                        result.push(thatBank.name);
+                                    });
                             }
                             index === item.length - 1 && res.json(result);
                         });
+                        console.log(result);
                     });
             });
         }
