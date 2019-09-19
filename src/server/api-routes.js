@@ -101,7 +101,7 @@ mongo.connect(
                                 (el.longitude > minLong &&
                                     el.longitude < maxLong)
                             ) {
-                                result.push(el);
+                                result.push(Object.values(el));
                             }
                             index === item.length - 1 && res.json(result);
                         });
