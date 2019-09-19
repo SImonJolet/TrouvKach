@@ -7,7 +7,7 @@ body {
     height: 100vh;
 }
 
-// BACKGROUND //
+/* -----------------------------------------| BACKGROUND |----------------------------------------- */
 
 .area {
     position: absolute;
@@ -127,9 +127,9 @@ body {
     }
 }
 
-// CONTENT //
+/* -----------------------------------------| HOME COMPONENT |----------------------------------------- */
 
-.wrapper {
+.wrapperHome {
     position: absolute;
     top: -75px;
     z-index: 100;
@@ -155,34 +155,34 @@ body {
 
     .small {
         animation: ripple 10s infinite;
-        animation-delay: 0s;
+        animation-delay: -2s;
         width: 80px;
         height: 80px;
     }
 
     .medium {
         animation: ripple 10s infinite;
-        animation-delay: 1s;
+        animation-delay: -1s;
         width: 160px;
         height: 160px;
     }
     .large {
         animation: ripple 10s infinite;
-        animation-delay: 2s;
+        animation-delay: 0s;
         width: 240px;
         height: 240px;
     }
 
     .xlarge {
         animation: ripple 10s infinite;
-        animation-delay: 3s;
+        animation-delay: 1s;
         width: 300px;
         height: 300px;
     }
 
     .xxlarge {
         animation: ripple 10s infinite;
-        animation-delay: 4s;
+        animation-delay: 2s;
         width: 360px;
         height: 360px;
     }
@@ -337,3 +337,55 @@ body {
         letter-spacing: 2rem;
     }
 }
+
+/* -----------------------------------------| LOADER |----------------------------------------- */
+
+.load {
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    animation: blinking 10s infinite;
+
+    h1 {
+      margin: 0;
+      padding-left: 2rem;
+      color: white;
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 2rem;
+    }
+}
+
+@keyframes blinking {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+  
+/* -----------------------------------------| MAPER COMPONENT |----------------------------------------- */
+  #app {
+    position: absolute;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+  }
+  .map {
+    z-index: 100;
+    position: absolute;
+    border: 2rem solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+  }
