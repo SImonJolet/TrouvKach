@@ -576,7 +576,7 @@ body {
   height: 100vh;
 }
 
-.map {
+#map {
   z-index: 100;
   position: absolute;
   border: 2rem solid rgba(255, 255, 255, 0.1);
