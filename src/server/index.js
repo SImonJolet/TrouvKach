@@ -4,6 +4,7 @@ import router from "./api-routes";
 
 const {APP_PORT} = process.env;
 const app = express();
+console.log(process.env);
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
