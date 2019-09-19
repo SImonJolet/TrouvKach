@@ -639,7 +639,8 @@ body {
 .map {
   z-index: 100;
   position: absolute;
-  border: 2rem solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
   border-radius: 0.5rem;
 }
 

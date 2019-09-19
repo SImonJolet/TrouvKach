@@ -3,16 +3,17 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 
 function Maper() {
-    const [usrLoc, setusrLoc] = useState();
+    const [functionstart, setfunctionstart] = useState();
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
-            setusrLoc([position.coords.latitude, position.coords.longitude]);
+            setfunctionstart(true);
 
             fetch(
                 `/api/${position.coords.latitude}/${position.coords.longitude}`,
             ).then(dataJSON => {
                 dataJSON.json().then(markers => {
+                    setfunctionstart(false);
                     const map = L.map("map", {
                         center: [
                             position.coords.latitude,
@@ -43,25 +44,27 @@ function Maper() {
                             popupAnchor: [0, -3],
                         });
                         const markerLocation = new L.LatLng(lat, lon);
+
                         const marker = new L.Marker(markerLocation, {
                             icon: moneyIcon,
                         });
+                        const button = `<button type="button">Click Me!</button>`;
                         marker.addTo(map);
                         marker.bindPopup(
-                            `<b>Bank:</b> ${element.bankDetails[0].name} (${element.bankDetails[0].country})<br><b>Address:</b> ${element.address}<br><b>Website:</b> <a href:"${element.bankDetails[0].url}" target= "blank">${element.bankDetails[0].url}</a><br><br><button class="button" type="button">GET ME THERE</button>`,
+                            `<b>Bank:</b> ${element.bankDetails[0].name} (${element.bankDetails[0].country})<br><b>Address:</b> ${element.address}<br><b>Website:</b> <a href:"${element.bankDetails[0].url}" target= "blank">${element.bankDetails[0].url}</a><br><br>${button}`,
                         );
-                        document.querySelector("button").onclick = () => {
-                            // L.Routing.control({
-                            //     waypoints: [
-                            //         L.latLng(
-                            //             position.coords.latitude,
-                            //             position.coords.longitude,
-                            //         ),
-                            //         L.latLng(50, 5),
-                            //     ],
-                            // }).addTo(map);
-                            console.log("salut");
-                        };
+                        // document.querySelector("#button").onclick = () => {
+                        //     L.Routing.control({
+                        //         waypoints: [
+                        //             L.latLng(
+                        //                 position.coords.latitude,
+                        //                 position.coords.longitude,
+                        //             ),
+                        //             L.latLng(marker),
+                        //         ],
+                        //     }).addTo(map);
+                        //     console.log("salut");
+                        // };
                     });
                     const usrIcon = new L.Icon({
                         iconUrl:
@@ -81,7 +84,7 @@ function Maper() {
         });
     }, []);
 
-    if (!usrLoc) {
+    if (functionstart === true) {
         return (
             <div className={"load"}>
                 <div id={"text"}>
@@ -93,7 +96,6 @@ function Maper() {
             </div>
         );
     }
-
     return (
         <div className={"map"}>
             <div id={"map"} style={{height: "75vh", width: "75vw"}} />
