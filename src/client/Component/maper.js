@@ -48,12 +48,12 @@ function Maper() {
                         const marker = new L.Marker(markerLocation, {
                             icon: moneyIcon,
                         });
-                        const button = `<button type="button">Click Me!</button>`;
+                        const button = `<button class="button" type="button">Click Me!</button>`;
                         marker.addTo(map);
                         marker.bindPopup(
                             `<b>Bank:</b> ${element.bankDetails[0].name} (${element.bankDetails[0].country})<br><b>Address:</b> ${element.address}<br><b>Website:</b> <a href:"${element.bankDetails[0].url}" target= "blank">${element.bankDetails[0].url}</a><br><br>${button}`,
                         );
-                        // document.querySelector("#button").onclick = () => {
+                        // document.querySelector(".button").onclick = () => {
                         //     L.Routing.control({
                         //         waypoints: [
                         //             L.latLng(
