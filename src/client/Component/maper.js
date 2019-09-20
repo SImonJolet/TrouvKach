@@ -5,16 +5,13 @@ import L from "leaflet";
 const moneyIcon = new L.Icon({
     iconUrl: "https://img.icons8.com/plasticine/100/000000/banknotes.png",
     iconSize: [45, 45],
-    popupAnchor: [1, -5],
+    popupAnchor: [-0.5, -5],
 });
 const usrIcon = new L.Icon({
     iconUrl: "https://img.icons8.com/plasticine/100/000000/marker.png",
     iconSize: [55, 55],
-    popupAnchor: [1, -14],
+    popupAnchor: [0, -10],
 });
-function GPS() {
-    console.log("ok");
-}
 function positionSet(p_lat, p_lon) {
     return [p_lat, p_lon];
 }
@@ -75,28 +72,38 @@ function Maper() {
                         icon={moneyIcon}>
                         <Popup>
                             {
-                                <div>
-                                    <h3>
-                                        {element.bankDetails[0].name}
-                                        {" ("}
-                                        {element.bankDetails[0].country}
-                                        {")"}
-                                    </h3>
-                                    <p>
-                                        <b>{"Address: "}</b>
-                                        {element.address}
-                                    </p>
-                                    <b>{"Website: "}</b>
-                                    <a
-                                        href={element.bankDetails[0].url}
-                                        target={"blank"}>
-                                        {element.bankDetails[0].url}
-                                    </a>
+                                <div id={"center"}>
+                                    <div>
+                                        <h3>
+                                            {element.bankDetails[0].name}
+                                            {" ("}
+                                            {element.bankDetails[0].country}
+                                            {")"}
+                                        </h3>
+                                        <p>
+                                            <b>{"Address: "}</b>
+                                            {element.address}
+                                        </p>
+                                        <b>{"Website: "}</b>
+                                        <a
+                                            href={element.bankDetails[0].url}
+                                            target={"blank"}>
+                                            {element.bankDetails[0].url}
+                                        </a>
+                                    </div>
                                     <button
                                         className={"bankBTN"}
-                                        onClick={GPS}
+                                        onClick={function GPS() {
+                                            window.open(
+                                                `https://www.google.be/maps/dir/${usrLoc}/${element.latitude},${element.longitude}`,
+                                            );
+                                        }}
                                         type={"button"}>
-                                        {"GET ME THERE"}
+                                        <img
+                                            src={
+                                                "https://www.gstatic.com/images/branding/product/2x/maps_512dp.png"
+                                            }
+                                        />
                                     </button>
                                 </div>
                             }
