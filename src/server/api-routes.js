@@ -9,7 +9,6 @@ mongo.connect(
         } else {
             const db = client.db("trouvkash");
             const terminals = db.collection("terminals");
-            const banks = db.collection("banks");
 
             router.get("/", (req, res) => {
                 res.json({
@@ -18,61 +17,18 @@ mongo.connect(
                 });
             });
 
-            router.get("/banks", (req, res) => {
-                res.send(
-                    banks.find().toArray((err1, items) => {
-                        // eslint-disable-next-line no-console
-                        console.log(err1, items);
-                    }),
-                );
-            });
-
-            router.get("/banks/:name", (req, res) => {
-                res.send(
-                    banks
-                        .find({name: req.params.name})
-                        .toArray((err2, item) => {
-                            // eslint-disable-next-line no-console
-                            console.log(err2, item);
-                        }),
-                );
-            });
-
-            router.get("/terminals", (req, res) => {
-                res.send(
-                    terminals.find().toArray((err3, items) => {
-                        // eslint-disable-next-line no-console
-                        console.log(err3, items);
-                    }),
-                );
-            });
-
-            router.get("/terminals/:latitude/:longitude", (req, res) => {
-                res.send(
-                    terminals
-                        .find({
-                            latitude: Number(req.params.latitude),
-                            longitude: Number(req.params.longitude),
-                        })
-                        .toArray((err4, item) => {
-                            // eslint-disable-next-line no-console
-                            console.log(err4, item);
-                        }),
-                );
-            });
-
             router.get("/:latitude/:longitude", (req, res) => {
                 terminals
                     .aggregate([
                         {
                             $match: {
                                 latitude: {
-                                    $gte: Number(req.params.latitude) - 10,
-                                    $lte: Number(req.params.latitude) + 10,
+                                    $gte: Number(req.params.latitude) - 0.1,
+                                    $lte: Number(req.params.latitude) + 0.1,
                                 },
                                 longitude: {
-                                    $gte: Number(req.params.longitude) - 20,
-                                    $lte: Number(req.params.longitude) + 20,
+                                    $gte: Number(req.params.longitude) - 0.2,
+                                    $lte: Number(req.params.longitude) + 0.2,
                                 },
                             },
                         },
@@ -91,7 +47,7 @@ mongo.connect(
                         const ratioLat =
                             Math.cos((req.params.latitude * Math.PI) / 180) *
                             111;
-                        const tenKmLat = (1 / ratioLat) * 10;
+                        const tenKmLat = (1 / ratioLat) * 0.75;
                         const minLat = latitude - tenKmLat;
                         const maxLat = latitude + tenKmLat;
 
@@ -100,13 +56,20 @@ mongo.connect(
                         const ratioLong =
                             Math.cos((req.params.longitude * Math.PI) / 180) *
                             85;
-                        const tenKmLong = (1 / ratioLong) * 20;
+                        const tenKmLong = (1 / ratioLong) * 1.5;
                         const minLong = longitude - tenKmLong;
                         const maxLong = longitude + tenKmLong;
                         const result = [];
 
                         // FOR LOOP ON TERMINALS ARRAY //
                         item.forEach((el, index) => {
+                            if (
+                                Object.getOwnPropertyNames(el.bankDetails)
+                                    .length <= 1
+                            ) {
+                                el.bankDetails = [{}];
+                                el.bankDetails[0].country = "N/A";
+                            }
                             if (
                                 el.latitude > minLat &&
                                 el.latitude < maxLat &&

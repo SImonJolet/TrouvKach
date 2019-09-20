@@ -436,6 +436,10 @@ body {
     border-radius: 0.5rem;
 }
 
+.leaflet-container {
+    border-radius: 0.5rem;
+}
+
 .leaflet-popup-content-wrapper {
     background: white;
     display: flex;
@@ -444,7 +448,8 @@ body {
 
     button {
         width: 100%;
-        height: 25%;
+        height: 1.5rem;
+        margin-top: 1rem;
         border-radius: 0.5rem;
         color: #61aeff;
         background: white;
