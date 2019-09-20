@@ -63,23 +63,35 @@ mongo.connect(
 
             router.get("/:latitude/:longitude", (req, res) => {
                 terminals
-                    .find({
-                        latitude: {
-                            $gte: Number(req.params.latitude) - 0.25,
-                            $lte: Number(req.params.latitude) + 0.25,
+                    .aggregate([
+                        {
+                            $match: {
+                                latitude: {
+                                    $gte: Number(req.params.latitude) - 0.1,
+                                    $lte: Number(req.params.latitude) + 0.1,
+                                },
+                                longitude: {
+                                    $gte: Number(req.params.longitude) - 0.2,
+                                    $lte: Number(req.params.longitude) + 0.2,
+                                },
+                            },
                         },
-                        longitude: {
-                            $gte: Number(req.params.longitude) - 0.25,
-                            $lte: Number(req.params.longitude) + 0.25,
+                        {
+                            $lookup: {
+                                from: "banks",
+                                localField: "bank",
+                                foreignField: "_id",
+                                as: "bankDetails",
+                            },
                         },
-                    })
+                    ])
                     .toArray((err5, item) => {
                         // LATITUDE //
                         const latitude = Number(req.params.latitude);
                         const ratioLat =
                             Math.cos((req.params.latitude * Math.PI) / 180) *
                             111;
-                        const tenKmLat = (1 / ratioLat) * 1;
+                        const tenKmLat = (1 / ratioLat) * 0.5;
                         const minLat = latitude - tenKmLat;
                         const maxLat = latitude + tenKmLat;
 
@@ -92,7 +104,6 @@ mongo.connect(
                         const minLong = longitude - tenKmLong;
                         const maxLong = longitude + tenKmLong;
                         const result = [];
-                        const termi = [];
 
                         // FOR LOOP ON TERMINALS ARRAY //
                         item.forEach((el, index) => {
@@ -103,17 +114,9 @@ mongo.connect(
                                     el.longitude < maxLong)
                             ) {
                                 result.push(el);
-
-                                banks
-                                    .find({_id: el.bank})
-                                    .toArray()
-                                    .then((err6, thatBank) => {
-                                        result.push(thatBank.name);
-                                    });
                             }
                             index === item.length - 1 && res.json(result);
                         });
-                        console.log(result);
                     });
             });
         }

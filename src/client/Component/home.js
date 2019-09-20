@@ -27,6 +27,7 @@ function Home() {
                 </div>
                 <div id={"subtitle"}>
                     <h1>{"Get started now"}</h1>
+                    <h6>{"(by clicking the pointer)"}</h6>
                 </div>
                 <div id={"home"}>
                     <button
