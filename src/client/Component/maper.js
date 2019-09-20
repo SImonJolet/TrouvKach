@@ -1,9 +1,27 @@
 import React, {useState, useEffect} from "react";
+import {Map, Marker, Popup, TileLayer} from "react-leaflet";
 import L from "leaflet";
-import "leaflet-routing-machine";
 
+const moneyIcon = new L.Icon({
+    iconUrl: "https://img.icons8.com/plasticine/100/000000/banknotes.png",
+    iconSize: [45, 45],
+    popupAnchor: [1, -5],
+});
+const usrIcon = new L.Icon({
+    iconUrl: "https://img.icons8.com/plasticine/100/000000/marker.png",
+    iconSize: [55, 55],
+    popupAnchor: [1, -14],
+});
+function GPS() {
+    console.log("ok");
+}
+function positionSet(p_lat, p_lon) {
+    return [p_lat, p_lon];
+}
+///////////////////////////////////////////////////////////////////////////////////////////
 function Maper() {
     const [usrLoc, setusrLoc] = useState();
+    let [markersList, setmarkersList] = useState();
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -12,77 +30,14 @@ function Maper() {
                 `/api/${position.coords.latitude}/${position.coords.longitude}`,
             ).then(dataJSON => {
                 dataJSON.json().then(markers => {
-                    const map = L.map("map", {
-                        center: [
-                            position.coords.latitude,
-                            position.coords.longitude,
-                        ],
-                        zoom: 15,
-                    });
-                    L.tileLayer(
-                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                        {
-                            attribution:
-                                '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                        },
-                    ).addTo(map);
-                    markers.forEach(element => {
-                        const lat = element.latitude;
-                        const lon = element.longitude;
-                        if (
-                            Object.getOwnPropertyNames(element.bankDetails)
-                                .length <= 1
-                        ) {
-                            element.bankDetails = "No info";
-                        }
-                        const moneyIcon = new L.Icon({
-                            iconUrl:
-                                "https://img.icons8.com/dusk/100/000000/euro-pound-exchange.png",
-                            iconSize: [30, 30],
-                            popupAnchor: [0, -3],
-                        });
-                        const markerLocation = new L.LatLng(lat, lon);
-
-                        const marker = new L.Marker(markerLocation, {
-                            icon: moneyIcon,
-                        });
-                        const button = `<button class="button" type="button">Click Me!</button>`;
-                        marker.addTo(map);
-                        marker.bindPopup(
-                            `<b>Bank:</b> ${element.bankDetails[0].name} (${element.bankDetails[0].country})<br><b>Address:</b> ${element.address}<br><b>Website:</b> <a href:"${element.bankDetails[0].url}" target= "blank">${element.bankDetails[0].url}</a><br><br>${button}`,
-                        );
-                        // document.querySelector(".button").onclick = () => {
-                        //     L.Routing.control({
-                        //         waypoints: [
-                        //             L.latLng(
-                        //                 position.coords.latitude,
-                        //                 position.coords.longitude,
-                        //             ),
-                        //             L.latLng(marker),
-                        //         ],
-                        //     }).addTo(map);
-                        //     console.log("salut");
-                        // };
-                    });
-                    const usrIcon = new L.Icon({
-                        iconUrl:
-                            "https://img.icons8.com/plasticine/100/000000/standing-man.png",
-                        iconSize: [60, 60],
-                        popupAnchor: [0, -10],
-                    });
-                    const markerUsr = new L.LatLng(
-                        position.coords.latitude,
-                        position.coords.longitude,
-                    );
-                    const markerUser = new L.Marker(markerUsr, {icon: usrIcon});
-                    markerUser.addTo(map);
-                    markerUser.bindPopup(`<b>This is you!</b>`);
+                    markersList = markers;
+                    setmarkersList(markersList);
                 });
             });
         });
     }, []);
 
-    if (!usrLoc) {
+    if (!markersList) {
         return (
             <div className={"load"}>
                 <div id={"text"}>
@@ -94,11 +49,62 @@ function Maper() {
             </div>
         );
     }
+
     return (
         <div className={"map"}>
-            <div id={"map"} style={{height: "75vh", width: "75vw"}} />
+            <Map
+                style={{height: "75vh", width: "75vw"}}
+                center={usrLoc}
+                zoom={15}>
+                <TileLayer
+                    url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+                    attribution={
+                        ' <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }
+                />
+                <Marker position={usrLoc} icon={usrIcon}>
+                    <Popup>{<h3>{"This is you."}</h3>}</Popup>
+                </Marker>
+                {markersList.map(element => (
+                    <Marker
+                        key={element._id}
+                        position={positionSet(
+                            element.latitude,
+                            element.longitude,
+                        )}
+                        icon={moneyIcon}>
+                        <Popup>
+                            {
+                                <div>
+                                    <h3>
+                                        {element.bankDetails[0].name}
+                                        {" ("}
+                                        {element.bankDetails[0].country}
+                                        {")"}
+                                    </h3>
+                                    <p>
+                                        <b>{"Address: "}</b>
+                                        {element.address}
+                                    </p>
+                                    <b>{"Website: "}</b>
+                                    <a
+                                        href={element.bankDetails[0].url}
+                                        target={"blank"}>
+                                        {element.bankDetails[0].url}
+                                    </a>
+                                    <button
+                                        className={"bankBTN"}
+                                        onClick={GPS}
+                                        type={"button"}>
+                                        {"GET ME THERE"}
+                                    </button>
+                                </div>
+                            }
+                        </Popup>
+                    </Marker>
+                ))}
+            </Map>
         </div>
     );
 }
-
 export default Maper;
