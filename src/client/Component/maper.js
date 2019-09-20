@@ -3,17 +3,15 @@ import L from "leaflet";
 import "leaflet-routing-machine";
 
 function Maper() {
-    const [functionstart, setfunctionstart] = useState();
+    const [usrLoc, setusrLoc] = useState();
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
-            setfunctionstart(true);
-
+            setusrLoc([position.coords.latitude, position.coords.longitude]);
             fetch(
                 `/api/${position.coords.latitude}/${position.coords.longitude}`,
             ).then(dataJSON => {
                 dataJSON.json().then(markers => {
-                    setfunctionstart(false);
                     const map = L.map("map", {
                         center: [
                             position.coords.latitude,
@@ -39,8 +37,8 @@ function Maper() {
                         }
                         const moneyIcon = new L.Icon({
                             iconUrl:
-                                "https://img.icons8.com/officel/80/000000/money-bag-euro.png",
-                            iconSize: [40, 40],
+                                "https://img.icons8.com/dusk/100/000000/euro-pound-exchange.png",
+                            iconSize: [30, 30],
                             popupAnchor: [0, -3],
                         });
                         const markerLocation = new L.LatLng(lat, lon);
@@ -68,8 +66,8 @@ function Maper() {
                     });
                     const usrIcon = new L.Icon({
                         iconUrl:
-                            "https://img.icons8.com/dusk/64/000000/user-location.png",
-                        iconSize: [50, 50],
+                            "https://img.icons8.com/plasticine/100/000000/standing-man.png",
+                        iconSize: [60, 60],
                         popupAnchor: [0, -10],
                     });
                     const markerUsr = new L.LatLng(
@@ -84,7 +82,7 @@ function Maper() {
         });
     }, []);
 
-    if (functionstart === true) {
+    if (!usrLoc) {
         return (
             <div className={"load"}>
                 <div id={"text"}>
