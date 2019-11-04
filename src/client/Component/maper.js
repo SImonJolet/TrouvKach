@@ -7,6 +7,7 @@ import bankLoc from "../Component/asset/icons8-billets-100.png";
 
 function Maper() {
     const [usrLoc, setusrLoc] = useState();
+    // eslint-disable-next-line prefer-const
     let [markersList, setmarkersList] = useState();
 
     useEffect(() => {
@@ -98,6 +99,7 @@ function Maper() {
                         ' <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }
                 />
+
                 <Marker position={usrLoc} icon={usrIcon}>
                     <Popup>{<h3>{"This is you."}</h3>}</Popup>
                 </Marker>
