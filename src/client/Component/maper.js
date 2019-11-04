@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
 import L from "leaflet";
 
+import UserLoc from "../Component/asset/icons8-localisation-de-l'utilisateur-64.png";
+import bankLoc from "../Component/asset/icons8-billets-100.png";
+
 function Maper() {
     const [usrLoc, setusrLoc] = useState();
 
@@ -36,8 +39,7 @@ function Maper() {
                             element.bankDetails = "No info";
                         }
                         const moneyIcon = new L.Icon({
-                            iconUrl:
-                                "https://img.icons8.com/officel/80/000000/money-bag-euro.png",
+                            iconUrl: bankLoc,
                             iconSize: [40, 40],
                             popupAnchor: [0, -3],
                         });
@@ -52,8 +54,7 @@ function Maper() {
                         );
                     }
                     const usrIcon = new L.Icon({
-                        iconUrl:
-                            "https://img.icons8.com/dusk/64/000000/user-location.png",
+                        iconUrl: UserLoc,
                         iconSize: [50, 50],
                         popupAnchor: [0, -10],
                     });
