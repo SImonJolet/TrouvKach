@@ -503,22 +503,37 @@ body {
   letter-spacing: 2rem;
 }
 
+#subtitle h6 {
+  margin: 0;
+  margin-top: 1.5rem;
+  padding-left: 0.2rem;
+  color: white;
+  font-size: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+}
+
 /* -----------------------------------------| LOADER |----------------------------------------- */
 .load {
   position: absolute;
+  height: 100vh;
+  width: 100vw;
+  -webkit-animation: blinking 3s forwards;
+          animation: blinking 3s forwards;
+}
+
+.load #text {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 100vh;
-  width: 100vw;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-animation: blinking 10s infinite;
-          animation: blinking 10s infinite;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 2rem;
 }
 
 .load h1 {
@@ -529,6 +544,54 @@ body {
   text-transform: uppercase;
 }
 
+.load #first {
+  -webkit-animation: dotblink 5s infinite;
+          animation: dotblink 5s infinite;
+  -webkit-animation-delay: 2.5s;
+          animation-delay: 2.5s;
+  opacity: 0;
+}
+
+.load #second {
+  -webkit-animation: dotblink 5s infinite;
+          animation: dotblink 5s infinite;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+  opacity: 0;
+}
+
+.load #third {
+  -webkit-animation: dotblink 5s infinite;
+          animation: dotblink 5s infinite;
+  -webkit-animation-delay: 4s;
+          animation-delay: 4s;
+  opacity: 0;
+}
+
+@-webkit-keyframes dotblink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dotblink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @-webkit-keyframes blinking {
   0% {
     opacity: 0;
@@ -537,16 +600,8 @@ body {
   1% {
     letter-spacing: 0rem;
   }
-  25% {
-    opacity: 1;
-    letter-spacing: 2rem;
-  }
-  50% {
-    opacity: 0.5;
-    letter-spacing: 2rem;
-  }
   100% {
-    opacity: 0;
+    opacity: 1;
     letter-spacing: 2rem;
   }
 }
@@ -559,16 +614,8 @@ body {
   1% {
     letter-spacing: 0rem;
   }
-  25% {
-    opacity: 1;
-    letter-spacing: 2rem;
-  }
-  50% {
-    opacity: 0.5;
-    letter-spacing: 2rem;
-  }
   100% {
-    opacity: 0;
+    opacity: 1;
     letter-spacing: 2rem;
   }
 }
@@ -592,11 +639,68 @@ body {
 .map {
   z-index: 100;
   position: absolute;
-  border: 2rem solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.leaflet-container {
   border-radius: 0.5rem;
 }
 
 .leaflet-popup-content-wrapper {
   background: white;
+  opacity: 0.95;
+  -webkit-box-shadow: 21px 19px 62px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 21px 19px 62px -12px rgba(0, 0, 0, 0.75);
+}
+
+.leaflet-popup-content-wrapper #center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.leaflet-popup-content-wrapper #center button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 3.5rem;
+  height: 3rem;
+  margin-top: 1rem;
+  padding-top: 0.3rem;
+  border-radius: 0.5rem;
+  border: 1px solid #61aeff;
+  outline: none;
+  cursor: pointer;
+}
+
+.leaflet-popup-content-wrapper #center button:hover {
+  background: #61aeff;
+  border: 1px solid white;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.leaflet-popup-content-wrapper #center img {
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 /*# sourceMappingURL=style.css.map */

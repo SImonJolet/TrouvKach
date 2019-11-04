@@ -336,25 +336,71 @@ body {
         text-transform: uppercase;
         letter-spacing: 2rem;
     }
+
+    h6 {
+        margin: 0;
+        margin-top: 1.5rem;
+        padding-left: 0.2rem;
+        color: white;
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2rem;
+    }
 }
 
 /* -----------------------------------------| LOADER |----------------------------------------- */
 
 .load {
     position: absolute;
-    display: flex;
     height: 100vh;
     width: 100vw;
-    justify-content: center;
-    align-items: center;
-    animation: blinking 10s infinite;
+    animation: blinking 3s forwards;
+
+    #text {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        margin-bottom: 2rem;
+    }
 
     h1 {
-      margin: 0;
-      padding-left: 2rem;
-      color: white;
-      font-size: 2rem;
-      text-transform: uppercase;
+        margin: 0;
+        padding-left: 2rem;
+        color: white;
+        font-size: 2rem;
+        text-transform: uppercase;
+    }
+
+    #first {
+        animation: dotblink 5s infinite;
+        animation-delay: 2.5s;
+        opacity: 0;
+    }
+
+    #second {
+        animation: dotblink 5s infinite;
+        animation-delay: 3s;
+        opacity: 0;
+    }
+
+    #third {
+        animation: dotblink 5s infinite;
+        animation-delay: 4s;
+        opacity: 0;
+    }
+
+    @keyframes dotblink {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
     }
 }
 
@@ -362,41 +408,75 @@ body {
     0% {
         opacity: 0;
         letter-spacing: 0rem;
-      }
-      1%{
+    }
+    1% {
         letter-spacing: 0rem;
-      }
-      25% {
+    }
+    100% {
         opacity: 1;
         letter-spacing: 2rem;
-      }
-      50% {
-        opacity: 0.5;
-        letter-spacing: 2rem;
-      }
-      100% {
-        opacity: 0;
-        letter-spacing: 2rem;
-      }
+    }
 }
-  
+
 /* -----------------------------------------| MAPER COMPONENT |----------------------------------------- */
 
-  #app {
+#app {
     position: absolute;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 100vw;
     height: 100vh;
-  }
-  .map {
+}
+.map {
     z-index: 100;
     position: absolute;
-    border: 2rem solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
     border-radius: 0.5rem;
-  }
+}
 
-  .leaflet-popup-content-wrapper {
-      background: white;
-  }
+.leaflet-container {
+    border-radius: 0.5rem;
+}
+
+.leaflet-popup-content-wrapper {
+    background: white;
+    opacity: 0.95;
+    -webkit-box-shadow: 21px 19px 62px -12px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 21px 19px 62px -12px rgba(0, 0, 0, 0.75);
+    box-shadow: 21px 19px 62px -12px rgba(0, 0, 0, 0.75);
+
+    #center {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 3.5rem;
+            height: 3rem;
+            margin-top: 1rem;
+            padding-top: 0.3rem;
+            border-radius: 0.5rem;
+            border: 1px solid #61aeff;
+            outline: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #61aeff;
+            border: 1px solid white;
+            transform: scale(1.2);
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    }
+}
